@@ -1,0 +1,18 @@
+@model SchoolDB.Models.Department
+@{
+    ViewData["Title"] = "Delete Department";
+}
+<h2><i class="fas fa-trash text-danger me-2"></i>Delete Department</h2>
+<div class="alert alert-danger">Are you sure you want to delete <strong>@Model.Name</strong>?</div>
+<div class="card col-md-5"><div class="card-body">
+    <dl class="row">
+        <dt class="col-sm-4">Name</dt><dd class="col-sm-8">@Model.Name</dd>
+        <dt class="col-sm-4">Code</dt><dd class="col-sm-8">@(Model.Code ?? "—")</dd>
+        <dt class="col-sm-4">Head</dt><dd class="col-sm-8">@(Model.DepartmentHead ?? "—")</dd>
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="DepartmentId" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div></div>

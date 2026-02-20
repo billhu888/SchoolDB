@@ -1,0 +1,106 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="display-5"><i class="fas fa-graduation-cap text-primary me-2"></i>School Database</h1>
+        <p class="lead text-muted">Welcome to the School Management System</p>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4 col-lg-2">
+        <a asp-controller="Students" asp-action="Index" class="text-decoration-none">
+            <div class="card text-center border-primary h-100">
+                <div class="card-body">
+                    <i class="fas fa-user-graduate fa-2x text-primary mb-2"></i>
+                    <h5 class="card-title text-primary">@ViewBag.StudentCount</h5>
+                    <p class="card-text text-muted small">Students</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <a asp-controller="Departments" asp-action="Index" class="text-decoration-none">
+            <div class="card text-center border-success h-100">
+                <div class="card-body">
+                    <i class="fas fa-building fa-2x text-success mb-2"></i>
+                    <h5 class="card-title text-success">@ViewBag.DepartmentCount</h5>
+                    <p class="card-text text-muted small">Departments</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <a asp-controller="Classes" asp-action="Index" class="text-decoration-none">
+            <div class="card text-center border-info h-100">
+                <div class="card-body">
+                    <i class="fas fa-chalkboard-teacher fa-2x text-info mb-2"></i>
+                    <h5 class="card-title text-info">@ViewBag.ClassCount</h5>
+                    <p class="card-text text-muted small">Classes</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <a asp-controller="Enrollments" asp-action="Index" class="text-decoration-none">
+            <div class="card text-center border-warning h-100">
+                <div class="card-body">
+                    <i class="fas fa-clipboard-list fa-2x text-warning mb-2"></i>
+                    <h5 class="card-title text-warning">@ViewBag.EnrollmentCount</h5>
+                    <p class="card-text text-muted small">Enrollments</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <a asp-controller="Sports" asp-action="Index" class="text-decoration-none">
+            <div class="card text-center border-danger h-100">
+                <div class="card-body">
+                    <i class="fas fa-trophy fa-2x text-danger mb-2"></i>
+                    <h5 class="card-title text-danger">@ViewBag.SportCount</h5>
+                    <p class="card-text text-muted small">Sports</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <a asp-controller="StudentSports" asp-action="Index" class="text-decoration-none">
+            <div class="card text-center border-secondary h-100">
+                <div class="card-body">
+                    <i class="fas fa-running fa-2x text-secondary mb-2"></i>
+                    <h5 class="card-title text-secondary">@ViewBag.StudentSportCount</h5>
+                    <p class="card-text text-muted small">Athlete Records</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white"><i class="fas fa-bolt me-2"></i>Quick Actions</div>
+            <div class="list-group list-group-flush">
+                <a asp-controller="Students" asp-action="Create" class="list-group-item list-group-item-action"><i class="fas fa-plus me-2 text-primary"></i>Add New Student</a>
+                <a asp-controller="Classes" asp-action="Create" class="list-group-item list-group-item-action"><i class="fas fa-plus me-2 text-info"></i>Add New Class</a>
+                <a asp-controller="Enrollments" asp-action="Create" class="list-group-item list-group-item-action"><i class="fas fa-plus me-2 text-warning"></i>Enroll Student in Class</a>
+                <a asp-controller="Sports" asp-action="Create" class="list-group-item list-group-item-action"><i class="fas fa-plus me-2 text-danger"></i>Add New Sport</a>
+                <a asp-controller="StudentSports" asp-action="Create" class="list-group-item list-group-item-action"><i class="fas fa-plus me-2 text-secondary"></i>Add Student to Sport</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-success text-white"><i class="fas fa-search me-2"></i>Browse Records</div>
+            <div class="list-group list-group-flush">
+                <a asp-controller="Students" asp-action="Index" class="list-group-item list-group-item-action"><i class="fas fa-user-graduate me-2 text-primary"></i>View All Students</a>
+                <a asp-controller="Departments" asp-action="Index" class="list-group-item list-group-item-action"><i class="fas fa-building me-2 text-success"></i>View All Departments</a>
+                <a asp-controller="Classes" asp-action="Index" class="list-group-item list-group-item-action"><i class="fas fa-chalkboard-teacher me-2 text-info"></i>View All Classes</a>
+                <a asp-controller="Sports" asp-action="Index" class="list-group-item list-group-item-action"><i class="fas fa-trophy me-2 text-danger"></i>View All Sports</a>
+                <a asp-controller="StudentSports" asp-action="Index" class="list-group-item list-group-item-action"><i class="fas fa-running me-2 text-secondary"></i>View All Athletes</a>
+            </div>
+        </div>
+    </div>
+</div>

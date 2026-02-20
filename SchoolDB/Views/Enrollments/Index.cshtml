@@ -1,0 +1,49 @@
+@model IEnumerable<SchoolDB.Models.Enrollment>
+@{
+    ViewData["Title"] = "Enrollments";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="fas fa-clipboard-list text-warning me-2"></i>Enrollments</h2>
+    <a asp-action="Create" class="btn btn-warning"><i class="fas fa-plus me-1"></i>New Enrollment</a>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="row g-2">
+            <div class="col-md-5">
+                <select name="studentId" class="form-select" asp-items="@ViewBag.Students"><option value="">All Students</option></select>
+            </div>
+            <div class="col-md-5">
+                <select name="classId" class="form-select" asp-items="@ViewBag.Classes"><option value="">All Classes</option></select>
+            </div>
+            <div class="col-md-2"><button type="submit" class="btn btn-outline-warning w-100">Filter</button></div>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-warning">
+            <tr><th>Student</th><th>Class</th><th>Department</th><th>Date</th><th>Status</th><th>Grade</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var e in Model)
+            {
+                <tr>
+                    <td><a asp-controller="Students" asp-action="Details" asp-route-id="@e.StudentId">@e.Student?.FullName</a></td>
+                    <td><span class="badge bg-secondary me-1">@e.Class?.ClassCode</span>@e.Class?.Name</td>
+                    <td><small class="text-muted">@e.Class?.Department?.Name</small></td>
+                    <td><small>@e.EnrollmentDate.ToString("MM/dd/yyyy")</small></td>
+                    <td><span class="badge @(e.Status == "Active" ? "bg-success" : e.Status == "Completed" ? "bg-primary" : "bg-danger")">@e.Status</span></td>
+                    <td>@(e.Grade ?? "—")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@e.EnrollmentId" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@e.EnrollmentId" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<p class="text-muted small">Showing @Model.Count() records</p>

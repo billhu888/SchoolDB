@@ -1,0 +1,48 @@
+@model IEnumerable<SchoolDB.Models.StudentSport>
+@{
+    ViewData["Title"] = "Student Athletes";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="fas fa-running text-secondary me-2"></i>Student Athletes</h2>
+    <a asp-action="Create" class="btn btn-secondary"><i class="fas fa-plus me-1"></i>Add Athlete</a>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="row g-2">
+            <div class="col-md-5">
+                <select name="studentId" class="form-select" asp-items="@ViewBag.Students"><option value="">All Students</option></select>
+            </div>
+            <div class="col-md-5">
+                <select name="sportId" class="form-select" asp-items="@ViewBag.Sports"><option value="">All Sports</option></select>
+            </div>
+            <div class="col-md-2"><button type="submit" class="btn btn-outline-secondary w-100">Filter</button></div>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-secondary">
+            <tr><th>Student</th><th>Sport</th><th>Position</th><th>Jersey #</th><th>Status</th><th>Join Date</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var ss in Model)
+            {
+                <tr>
+                    <td><a asp-controller="Students" asp-action="Details" asp-route-id="@ss.StudentId">@ss.Student?.FullName</a></td>
+                    <td><i class="fas fa-trophy me-1 text-warning"></i>@ss.Sport?.Name <small class="text-muted">(@ss.Sport?.Gender)</small></td>
+                    <td>@(ss.Position ?? "—")</td>
+                    <td>@(ss.JerseyNumber ?? "—")</td>
+                    <td><span class="badge @(ss.Status == "Active" ? "bg-success" : ss.Status == "Injured" ? "bg-danger" : "bg-secondary")">@ss.Status</span></td>
+                    <td><small>@ss.JoinDate.ToString("MM/dd/yyyy")</small></td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@ss.StudentSportId" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@ss.StudentSportId" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

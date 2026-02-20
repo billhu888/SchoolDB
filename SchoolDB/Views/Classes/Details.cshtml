@@ -1,0 +1,57 @@
+@model SchoolDB.Models.Class
+@{
+    ViewData["Title"] = "Class Details";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="fas fa-chalkboard-teacher text-info me-2"></i>@Model.Name <small class="text-muted">(@Model.ClassCode)</small></h2>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ClassId" class="btn btn-warning"><i class="fas fa-edit me-1"></i>Edit</a>
+        <a asp-action="Index" class="btn btn-secondary ms-1"><i class="fas fa-arrow-left me-1"></i>Back</a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">Class Info</div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-5">Department</dt><dd class="col-sm-7">@Model.Department?.Name</dd>
+                    <dt class="col-sm-5">Instructor</dt><dd class="col-sm-7">@(Model.Instructor ?? "—")</dd>
+                    <dt class="col-sm-5">Credits</dt><dd class="col-sm-7">@Model.CreditHours</dd>
+                    <dt class="col-sm-5">Room</dt><dd class="col-sm-7">@(Model.Room ?? "—")</dd>
+                    <dt class="col-sm-5">Schedule</dt><dd class="col-sm-7">@(Model.Schedule ?? "—")</dd>
+                    <dt class="col-sm-5">Semester</dt><dd class="col-sm-7">@(Model.Semester ?? "—")</dd>
+                    <dt class="col-sm-5">Enrollment</dt><dd class="col-sm-7">@Model.Enrollments.Count / @Model.MaxEnrollment</dd>
+                </dl>
+                <p class="mt-2 mb-0 text-muted small">@Model.Description</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">Enrolled Students <span class="badge bg-white text-primary">@Model.Enrollments.Count</span></div>
+            <div class="card-body p-0">
+                @if (Model.Enrollments.Any())
+                {
+                    <table class="table table-sm mb-0">
+                        <thead><tr><th>Student #</th><th>Name</th><th>Status</th><th>Grade</th></tr></thead>
+                        <tbody>
+                            @foreach (var e in Model.Enrollments)
+                            {
+                                <tr>
+                                    <td><a asp-controller="Students" asp-action="Details" asp-route-id="@e.StudentId">@e.Student?.StudentNumber</a></td>
+                                    <td>@e.Student?.FullName</td>
+                                    <td><span class="badge @(e.Status == "Active" ? "bg-success" : e.Status == "Completed" ? "bg-primary" : "bg-danger")">@e.Status</span></td>
+                                    <td>@(e.Grade ?? "—")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else { <p class="p-3 text-muted mb-0">No students enrolled.</p> }
+            </div>
+        </div>
+    </div>
+</div>

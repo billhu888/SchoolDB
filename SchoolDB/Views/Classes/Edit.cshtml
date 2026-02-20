@@ -1,0 +1,25 @@
+@model SchoolDB.Models.Class
+@{
+    ViewData["Title"] = "Edit Class";
+}
+<h2><i class="fas fa-edit text-warning me-2"></i>Edit Class</h2>
+<div class="row"><div class="col-md-8"><div class="card"><div class="card-body">
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        <input type="hidden" asp-for="ClassId" />
+        <div class="row g-3">
+            <div class="col-md-8"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" /></div>
+            <div class="col-md-4"><label asp-for="ClassCode" class="form-label"></label><input asp-for="ClassCode" class="form-control" /></div>
+            <div class="col-md-6"><label asp-for="DepartmentId" class="form-label">Department</label><select asp-for="DepartmentId" class="form-select" asp-items="ViewBag.DepartmentId"></select></div>
+            <div class="col-md-6"><label asp-for="Instructor" class="form-label"></label><input asp-for="Instructor" class="form-control" /></div>
+            <div class="col-md-3"><label asp-for="CreditHours" class="form-label"></label><input asp-for="CreditHours" class="form-control" type="number" /></div>
+            <div class="col-md-3"><label asp-for="MaxEnrollment" class="form-label"></label><input asp-for="MaxEnrollment" class="form-control" type="number" /></div>
+            <div class="col-md-3"><label asp-for="Room" class="form-label"></label><input asp-for="Room" class="form-control" /></div>
+            <div class="col-md-3"><label asp-for="Semester" class="form-label"></label><input asp-for="Semester" class="form-control" /></div>
+            <div class="col-12"><label asp-for="Schedule" class="form-label"></label><input asp-for="Schedule" class="form-control" /></div>
+            <div class="col-12"><label asp-for="Description" class="form-label"></label><textarea asp-for="Description" class="form-control" rows="2"></textarea></div>
+        </div>
+        <div class="mt-4"><button type="submit" class="btn btn-warning"><i class="fas fa-save me-1"></i>Update</button><a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a></div>
+    </form>
+</div></div></div></div>
+@section Scripts { @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} }

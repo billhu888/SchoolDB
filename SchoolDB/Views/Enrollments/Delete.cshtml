@@ -1,0 +1,19 @@
+@model SchoolDB.Models.Enrollment
+@{
+    ViewData["Title"] = "Remove Enrollment";
+}
+<h2><i class="fas fa-trash text-danger me-2"></i>Remove Enrollment</h2>
+<div class="alert alert-warning">Are you sure you want to remove this enrollment?</div>
+<div class="card col-md-5"><div class="card-body">
+    <dl class="row">
+        <dt class="col-sm-4">Student</dt><dd class="col-sm-8">@Model.Student?.FullName</dd>
+        <dt class="col-sm-4">Class</dt><dd class="col-sm-8">@Model.Class?.Name (@Model.Class?.ClassCode)</dd>
+        <dt class="col-sm-4">Status</dt><dd class="col-sm-8">@Model.Status</dd>
+        <dt class="col-sm-4">Grade</dt><dd class="col-sm-8">@(Model.Grade ?? "—")</dd>
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="EnrollmentId" />
+        <button type="submit" class="btn btn-danger">Remove</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div></div>

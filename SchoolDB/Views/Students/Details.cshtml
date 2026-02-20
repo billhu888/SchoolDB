@@ -1,0 +1,99 @@
+@model SchoolDB.Models.Student
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2><i class="fas fa-user-graduate text-primary me-2"></i>@Model.FullName</h2>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.StudentId" class="btn btn-warning"><i class="fas fa-edit me-1"></i>Edit</a>
+        <a asp-action="Index" class="btn btn-secondary ms-1"><i class="fas fa-arrow-left me-1"></i>Back</a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white"><i class="fas fa-id-card me-1"></i>Student Info</div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-5">Student #</dt>
+                    <dd class="col-sm-7"><span class="badge bg-secondary">@Model.StudentNumber</span></dd>
+                    <dt class="col-sm-5">Grade Level</dt>
+                    <dd class="col-sm-7">@Model.GradeLevel</dd>
+                    <dt class="col-sm-5">Email</dt>
+                    <dd class="col-sm-7"><small>@Model.Email</small></dd>
+                    <dt class="col-sm-5">Date of Birth</dt>
+                    <dd class="col-sm-7">@Model.DateOfBirth.ToString("MM/dd/yyyy")</dd>
+                    <dt class="col-sm-5">Enrolled</dt>
+                    <dd class="col-sm-7">@Model.EnrollmentDate.ToString("MM/dd/yyyy")</dd>
+                    <dt class="col-sm-5">Department</dt>
+                    <dd class="col-sm-7">@(Model.Department?.Name ?? "—")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-header bg-info text-white">
+                <i class="fas fa-clipboard-list me-1"></i>Enrolled Classes
+                <span class="badge bg-white text-info ms-2">@Model.Enrollments.Count</span>
+            </div>
+            <div class="card-body p-0">
+                @if (Model.Enrollments.Any())
+                {
+                    <table class="table table-sm mb-0">
+                        <thead><tr><th>Code</th><th>Class</th><th>Department</th><th>Status</th><th>Grade</th></tr></thead>
+                        <tbody>
+                            @foreach (var e in Model.Enrollments)
+                            {
+                                <tr>
+                                    <td><span class="badge bg-secondary">@e.Class?.ClassCode</span></td>
+                                    <td>@e.Class?.Name</td>
+                                    <td><small>@e.Class?.Department?.Name</small></td>
+                                    <td><span class="badge @(e.Status == "Active" ? "bg-success" : e.Status == "Completed" ? "bg-primary" : "bg-danger")">@e.Status</span></td>
+                                    <td>@(e.Grade ?? "—")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="p-3 text-muted mb-0">No class enrollments.</p>
+                }
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <i class="fas fa-trophy me-1"></i>Sports
+                <span class="badge bg-white text-danger ms-2">@Model.StudentSports.Count</span>
+            </div>
+            <div class="card-body p-0">
+                @if (Model.StudentSports.Any())
+                {
+                    <table class="table table-sm mb-0">
+                        <thead><tr><th>Sport</th><th>Position</th><th>Jersey</th><th>Status</th></tr></thead>
+                        <tbody>
+                            @foreach (var ss in Model.StudentSports)
+                            {
+                                <tr>
+                                    <td>@ss.Sport?.Name <small class="text-muted">(@ss.Sport?.Gender)</small></td>
+                                    <td>@(ss.Position ?? "—")</td>
+                                    <td>@(ss.JerseyNumber ?? "—")</td>
+                                    <td><span class="badge @(ss.Status == "Active" ? "bg-success" : "bg-secondary")">@ss.Status</span></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="p-3 text-muted mb-0">Not on any sports team.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

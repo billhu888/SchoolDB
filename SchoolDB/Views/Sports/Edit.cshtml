@@ -1,0 +1,22 @@
+@model SchoolDB.Models.Sport
+@{
+    ViewData["Title"] = "Edit Sport";
+}
+<h2><i class="fas fa-edit text-warning me-2"></i>Edit Sport</h2>
+<div class="row"><div class="col-md-6"><div class="card"><div class="card-body">
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        <input type="hidden" asp-for="SportId" />
+        <div class="mb-3"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" /></div>
+        <div class="mb-3"><label asp-for="Gender" class="form-label"></label>
+            <select asp-for="Gender" class="form-select"><option value="">Select...</option><option>Men's</option><option>Women's</option><option>Co-Ed</option></select></div>
+        <div class="mb-3"><label asp-for="Season" class="form-label"></label>
+            <select asp-for="Season" class="form-select"><option value="">Select...</option><option>Fall</option><option>Winter</option><option>Spring</option><option>Year-Round</option></select></div>
+        <div class="mb-3"><label asp-for="Coach" class="form-label"></label><input asp-for="Coach" class="form-control" /></div>
+        <div class="mb-3"><label asp-for="MaxRosterSize" class="form-label"></label><input asp-for="MaxRosterSize" class="form-control" type="number" /></div>
+        <div class="mb-3"><label asp-for="Description" class="form-label"></label><textarea asp-for="Description" class="form-control" rows="2"></textarea></div>
+        <button type="submit" class="btn btn-warning"><i class="fas fa-save me-1"></i>Update</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div></div></div></div>
+@section Scripts { @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} }

@@ -1,0 +1,20 @@
+@model SchoolDB.Models.Department
+@{
+    ViewData["Title"] = "Add Department";
+}
+<h2><i class="fas fa-plus text-success me-2"></i>Add Department</h2>
+<div class="row"><div class="col-md-6">
+    <div class="card"><div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <div class="mb-3"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger small"></span></div>
+            <div class="mb-3"><label asp-for="Code" class="form-label"></label><input asp-for="Code" class="form-control" /><span asp-validation-for="Code" class="text-danger small"></span></div>
+            <div class="mb-3"><label asp-for="DepartmentHead" class="form-label"></label><input asp-for="DepartmentHead" class="form-control" /></div>
+            <div class="mb-3"><label asp-for="OfficeLocation" class="form-label"></label><input asp-for="OfficeLocation" class="form-control" /></div>
+            <div class="mb-3"><label asp-for="Description" class="form-label"></label><textarea asp-for="Description" class="form-control" rows="3"></textarea></div>
+            <button type="submit" class="btn btn-success"><i class="fas fa-save me-1"></i>Save</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div></div>
+</div></div>
+@section Scripts { @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} }
